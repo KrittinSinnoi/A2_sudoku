@@ -76,9 +76,6 @@ function blanknum() {
 }
 
 
-//function keyPressed() {
-//  if (key === ' ') {
-//    randomBoard();
-//  }
-//}
+
   
+
