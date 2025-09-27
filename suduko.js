@@ -37,8 +37,8 @@ function setup(){
   saveBut.position((windowWidth - solveBut.width) /2.6, size + 140);
   saveBut.mousePressed(saveGame);
   
-  let cnv = createCanvas(size,size);
-  cnv.parent('canvas-container');
+  //let cnv = createCanvas(size,size);
+  //cnv.parent('canvas-container');
 
 }
 
@@ -184,3 +184,4 @@ function saveGame(){
   saveStrings(lines, 'sudoku_save.txt');
 }
   
+
