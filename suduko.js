@@ -184,7 +184,3 @@ function saveGame(){
   saveStrings(lines, 'sudoku_save.txt');
 }
   
-
-
-
-
