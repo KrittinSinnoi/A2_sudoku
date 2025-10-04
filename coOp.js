@@ -12,13 +12,18 @@ let colors = {
   2: [0, 200, 100]
 };
 let ownerBoard = [];
+let boardLock = [];
 
 function handleFile(file) {
   if (file.type === 'text') {
     let lines = file.data.split("\n");
     board = [];
+    ownerBoard = [];
+    boardLock = [];
     for (let r = 0; r < 9; r++) {
       board[r] = lines[r].trim().split("").map(Number);
+      ownerBoard[r] = Array(9).fill(0); 
+      boardLock[r] = board[r].map(v => v !== 0);
     }
   }
 }
@@ -55,9 +60,11 @@ function draw(){
 function initEmpty(){
   board = [];
   ownerBoard = [];
+  ownerBoard = [];
   for(let r=0;r<9;r++){
     board[r] = Array(9).fill(0);
     ownerBoard[r] = Array(9).fill(0);
+    boardLock[r] = Array(9).fill(false);
   }
 }
 
@@ -78,7 +85,13 @@ function drawNumbers() {
     for (let c = 0; c < 9; c++) {
       let v = board[r]?.[c];
       if (v && v !== 0) {
-        fill(colors[player]);
+        if(wrongCells.has(`${r},${c}`)){
+          fill(255,0,0); 
+        } else if(boardLock[r][c]){
+          fill(100); 
+        } else {
+          fill(colors[player]);
+        }
         text(v, c * boxSize + boxSize / 2, r * boxSize + boxSize / 2);
       }
     }
@@ -105,13 +118,17 @@ function drawSelected(){
 
 function keyPressed(){
   if(selected.c >= 0 && selected.r >= 0){
+    let r = selected.r;
+    let c = selected.c;
+    
+    if(boardLock[r][c] && !wrongCells.has(`${r},${c}`)) return;
+    
     if( key >= '1' && key <= '9' ){
       board[selected.r][selected.c] = int(key);
-      //ownerBoard[selected.r][selected.c] = player;
+      ownerBoard[r][c] = player;
       checkSolution();
       
-      let before = wrongCells.size;
-      if(wrongCells.size > before){
+      if(wrongCells.has(`${r},${c}`)){
         score[player] -= 1; // worng
       }else{
         score[player] += 1; // corect
@@ -207,3 +224,4 @@ function saveGame(){
   saveStrings(lines, 'sudoku_save.txt');
 }
   
+
