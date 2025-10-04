@@ -19,22 +19,8 @@ function setup(){
   let input = createFileInput(handleFile);
   input.position(569,size + 100);
   
-  let solveBut = createButton("Solve");
-  solveBut.position((windowWidth - solveBut.width) / 1.4, size - 350);
-  solveBut.mousePressed(() => {
-    if(solveSudoku(board)){
-      console.log("Sudoku Solved!");
-    }else{
-      console.log("Sudoku didn't Solved YET!");
-    }
-  });
-  
-  let checkBut = createButton("Check Solution");
-  checkBut.position((windowWidth - solveBut.width) / 1.4, size - 300);
-  checkBut.mousePressed(checkSolution);
-  
   let saveBut = createButton("Save Game");
-  saveBut.position((windowWidth - solveBut.width) /2.6, size + 140);
+  saveBut.position((windowWidth - saveBut.width) /1.4, size - 300);
   saveBut.mousePressed(saveGame);
   
   let cnv = createCanvas(size,size);
@@ -48,7 +34,7 @@ function draw(){
   drawNumbers();
   drawSelected();
   drawWrong();
-  
+
 }
 
 function drawTable() {
@@ -96,6 +82,7 @@ function keyPressed(){
   if(selected.c >= 0 && selected.r >= 0){
     if( key >= '1' && key <= '9' ){
       board[selected.r][selected.c] = int(key);
+      checkSolution();
     }
     else if( key === '0' || keyCode === BACKSPACE || keyCode === DELETE ){
       board[selected.r][selected.c] = 0;
@@ -184,5 +171,3 @@ function saveGame(){
   saveStrings(lines, 'sudoku_save.txt');
 }
   
-
-
