@@ -190,8 +190,10 @@ function drawWrong() {
     noFill();
     stroke(255, 0, 0);
     strokeWeight(3);
-    wrongCells.forEach(key => {
-        let [r, c] = key.split(",").map(Number);
+    wrongCells.forEach(function(key) {
+        var parts = key.split(",");
+        var r = Number(parts[0]);
+        var c = Number(parts[1]);
         rect(c * boxSize, r * boxSize, boxSize, boxSize);
     });
 }
@@ -200,6 +202,7 @@ function saveGame() {
     let lines = board.map(row => row.join(''));
     saveStrings(lines, 'sudoku_save.txt');
 }
+
 
 
 
