@@ -63,14 +63,22 @@ function drawNumbers() {
     fill(0);
     for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
-            let v = board[r]?.[c];
-            if (v && v !== 0) {
-                if (wrongCells.has(`${r},${c}`)) {
-                    fill(255, 0, 0);
-                } else if (boardLock[r][c]) {
-                    fill(100);
-                }
-                text(v, c * boxSize + boxSize / 2, r * boxSize + boxSize / 2);
+            let v = board[r][c];
+            if (v === 0) { // ถ้าช่องนี้ว่าง (เป็น 0 หรือไม่มีค่า) ให้ข้ามไป
+                continue;
+            }
+
+            if (wrongCells.has(r + "," + c)) {
+                fill(255, 0, 0); 
+            } else if (boardLock[r][c]) {
+                fill(100);       
+            } else {
+                fill(0);         
+            }
+
+            let x = c * boxSize + boxSize / 2; //สร้างตัวแปล ลดความยาวใน text()
+            let y = r * boxSize + boxSize / 2;
+            text(v, x, y);
             }
         }
     }
@@ -192,3 +200,4 @@ function saveGame() {
     let lines = board.map(row => row.join(''));
     saveStrings(lines, 'sudoku_save.txt');
 }
+
