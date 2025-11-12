@@ -182,7 +182,7 @@ function checkSolution() {
     if (wrongCells.size === 0) {
         console.log("Good JOB!");
     } else {
-        console.log(`Found ${wrongCells.size} incorrect cell(s)!`);
+        console.log("Found " + wrongCells.size + " incorrect cell(s)!");
     }
 }
 
@@ -202,6 +202,7 @@ function saveGame() {
     let lines = board.map(row => row.join(''));
     saveStrings(lines, 'sudoku_save.txt');
 }
+
 
 
 
