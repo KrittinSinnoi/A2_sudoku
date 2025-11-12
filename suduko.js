@@ -107,7 +107,7 @@ function keyPressed() {
         let r = selected.r;
         let c = selected.c;
 
-        if (boardLock[r][c] && !wrongCells.has(`${r},${c}`)) return;
+        if (boardLock[r][c] && !wrongCells.has(r + "," + c)) return;
 
         if (key >= '1' && key <= '9') {
             board[selected.r][selected.c] = int(key);
@@ -200,4 +200,5 @@ function saveGame() {
     let lines = board.map(row => row.join(''));
     saveStrings(lines, 'sudoku_save.txt');
 }
+
 
