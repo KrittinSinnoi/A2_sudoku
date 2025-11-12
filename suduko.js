@@ -159,11 +159,11 @@ function checkSolution() {
             if (val === 0) continue;
 
             for (let i = 0; i < 9; i++) {
-                if (i !== c && board[r][i] === val) wrongCells.add(`${r},${c}`);
+                if (i !== c && board[r][i] === val) wrongCells.add(r + "," + c);
             }
 
             for (let j = 0; j < 9; j++) {
-                if (j !== r && board[j][c] === val) wrongCells.add(`${r},${c}`);
+                if (j !== r && board[j][c] === val) wrongCells.add(r + "," + c);
             }
 
             let startR = Math.floor(r / 3) * 3;
@@ -173,7 +173,7 @@ function checkSolution() {
                     let rr = startR + i;
                     let cc = startC + j;
                     if ((rr !== r || cc !== c) && board[rr][cc] === val)
-                        wrongCells.add(`${r},${c}`);
+                        wrongCells.add(r + "," + c);
                 }
             }
         }
@@ -200,5 +200,6 @@ function saveGame() {
     let lines = board.map(row => row.join(''));
     saveStrings(lines, 'sudoku_save.txt');
 }
+
 
 
