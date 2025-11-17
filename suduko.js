@@ -37,6 +37,10 @@ function draw() {
     drawNumbers();
     drawSelected();
     drawWrong();
+
+    let count = findEmty();
+
+    document.getElementById('Emtycells').innerText = `Emty cells: ${count} cells`;
 }
 
 function initEmpty() {
@@ -203,6 +207,17 @@ function saveGame() {
     saveStrings(lines, 'sudoku_save.txt');
 }
 
+function findEmty(){  
+    let count = 0;
+    for(let r = 0; r < 9; r++){
+        for(let c = 0; c < 9; c++){
+            if(board[r][c] === 0){
+              count ++;
+            }
+        }
+    }
+    return count;
+}
 
 
 
