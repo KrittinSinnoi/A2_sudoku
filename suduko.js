@@ -229,5 +229,16 @@ function selectRow(){
     }
 }
 
+function findEmRow(){
+    let EmRow = [];
+    for(let r = 0; r < 9; r++){
+        let count = 0;
+        for(let c = 0; c < 9; c++){
+            if(board[r][c] === 0) count++;
+        }
+        EmRow.push(count);
+    }
+    return EmRow;
+}
 
 
