@@ -253,3 +253,24 @@ function updateRowInfo() {
     document.getElementById("rowInfo").innerHTML = html;
 }
 
+function isValidInBoard(r, c, val) {
+    // ตรวจ row
+    for (let i = 0; i < 9; i++) {
+        if (i !== c && board[r][i] === val) return false;
+    }
+    // ตรวจ column
+    for (let i = 0; i < 9; i++) {
+        if (i !== r && board[i][c] === val) return false;
+    }
+    // ตรวจ 3x3 block
+    let startR = Math.floor(r / 3) * 3;
+    let startC = Math.floor(c / 3) * 3;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            let rr = startR + i;
+            let cc = startC + j;
+            if ((rr !== r || cc !== c) && board[rr][cc] === val) return false;
+        }
+    }
+    return true;
+}
