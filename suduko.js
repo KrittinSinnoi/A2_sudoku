@@ -288,7 +288,6 @@ function correctAns(){
             correctRow.push(" "); 
         } else if (isValidInBoard(rSelected, c, val)) {
             correctRow.push(val); 
-            //boardLock[rSelected][c] = true
         } else {
             correctRow.push(" "); 
         }
@@ -297,3 +296,4 @@ function correctAns(){
     document.getElementById("rowCorrect").innerHTML =
         `Row ${rSelected + 1} correct: ${correctRow.join(" ")}`;
 }
+
