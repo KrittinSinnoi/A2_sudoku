@@ -39,6 +39,7 @@ function draw() {
     drawWrong();
     selectRow();
     updateRowInfo();
+    correctAns();
 
     let count = findEmty();
 
@@ -273,4 +274,26 @@ function isValidInBoard(r, c, val) {
         }
     }
     return true;
+}
+
+function correctAns(){
+    if (selected.c < 0 || selected.r < 0) return;
+    
+    const rSelected = selected.r;
+    
+    let correctRow = [];
+    for (let c = 0; c < 9; c++) {
+        let val = board[rSelected][c];
+        if (val === 0) {
+            correctRow.push(" "); 
+        } else if (isValidInBoard(rSelected, c, val)) {
+            correctRow.push(val); 
+            //boardLock[rSelected][c] = true
+        } else {
+            correctRow.push(" "); 
+        }
+    }
+
+    document.getElementById("rowCorrect").innerHTML =
+        `Row ${rSelected + 1} correct: ${correctRow.join(" ")}`;
 }
