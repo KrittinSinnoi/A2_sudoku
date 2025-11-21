@@ -38,6 +38,7 @@ function draw() {
     drawSelected();
     drawWrong();
     selectRow();
+    updateRowInfo();
 
     let count = findEmty();
 
@@ -241,4 +242,14 @@ function findEmRow(){
     return EmRow;
 }
 
+function updateRowInfo() {
+    let info = findEmRow();
+    let html = "";
+
+    for (let r = 0; r < 9; r++) {
+        html += `Row ${r+1}: ${info[r]} empty<br>`;
+    }
+
+    document.getElementById("rowInfo").innerHTML = html;
+}
 
