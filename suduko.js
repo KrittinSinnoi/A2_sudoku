@@ -37,6 +37,7 @@ function draw() {
     drawNumbers();
     drawSelected();
     drawWrong();
+    selectRow();
 
     let count = findEmty();
 
@@ -219,6 +220,14 @@ function findEmty(){
     return count;
 }
 
+function selectRow(){
+    if (selected.c >= 0 && selected.r >= 0) {
+        noFill();
+        stroke(200, 0, 0);
+        strokeWeight(3);
+        rect(0, selected.r * boxSize, width, boxSize);
+    }
+}
 
 
 
